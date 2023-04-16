@@ -6,9 +6,13 @@ import { Patient } from './patient.model';
 export class PatientService {
   private readonly patients: Patient[] = [];
 
+  // added a private counter
+  private nextId = 1;
+
   public async register(patientInput: PatientInput): Promise<Patient> {
     const newPatient = {
-      id: 1,
+      // now we use this new counter and increase it in every call
+      id: this.nextId++,
       name: patientInput.name,
     };
 
