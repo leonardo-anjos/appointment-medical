@@ -19,8 +19,8 @@ describe('AppointmentService', () => {
   // 1. An unconfirmed schedule should be created on success
   // 2. The end time should not be before the start time
   // 3. The end time should be after the start time
-  // 4. The patientId should be validated?
-
+  // 4. An appointment start and end time should be within the same day (NEW)
+  // 5. The patientId should be validated?
 
   it('should schedule an unconfirmed appointment for a user on success', () => {
     const startTime = new Date('2022-01-01T14:00:00Z');
@@ -64,5 +64,18 @@ describe('AppointmentService', () => {
         endTime,
       }),
     ).toThrowError(`appointment's endTime should be after startTime`);
+  });
+
+  it('should throw an error when end time is in the next day', () => {
+    const startTime = new Date('2023-05-15T08:00:00Z');
+    const endTime = new Date('2023-05-16T08:00:00Z');
+
+    expect(() =>
+      service.scheduleAppointment({
+        patientId: 1,
+        startTime,
+        endTime,
+      }),
+    ).toThrowError(`appointment's endTime should be in the same day as start time's`);
   });
 });
