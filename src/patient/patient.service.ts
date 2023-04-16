@@ -18,6 +18,6 @@ export class PatientService {
   }
 
   public async doesPatientExist(patientId: number): Promise<boolean> {
-    return false;
+    return this.patients.some((patient) => patient.id === patientId);
   }
 }
