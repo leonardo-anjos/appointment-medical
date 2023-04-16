@@ -31,6 +31,10 @@ describe('PatientService', () => {
     });
   });
 
+  // 1. We should be able to say when a patient exists.
+  // 2. We should be able to register a patient.
+  // 3. The patientId should be validated.
+
   describe('does patient exist', () => {
     it('should return false when no patient was registered', async () => {
       const patientId = 1;
@@ -44,6 +48,13 @@ describe('PatientService', () => {
       const exists = await service.doesPatientExist(patientId);
 
       expect(exists).toBe(true);
+    });
+
+    it('should return different ids when called twice with the same name', async () => {
+      const firstPatient = await service.register({ name: 'Leonardo Anjos' });
+      const secondPatient = await service.register({ name: 'Leonardo Anjos' });
+
+      expect(firstPatient).not.toEqual(secondPatient);
     });
   });
 });
