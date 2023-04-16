@@ -119,7 +119,6 @@ describe('AppointmentService', () => {
       const startTime = new Date('2023-05-01T14:00:00Z');
       const endTime = new Date('2023-05-01T15:00:00Z');
 
-      // Using the `register` method to retrieve the new patient id
       const { id: patientId } = await patientService.register({
         name: 'Leonardo Anjos',
       });
