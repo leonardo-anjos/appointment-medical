@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppointmentService } from './appointment.service';
-import { PatientService } from 'src/patient/patient.service';
-import { PatientModule } from 'src/patient/patient.module';
+import { PatientModule } from '../patient/patient.module';
+import { PatientService } from '../patient/patient.service';
 
 describe('AppointmentService', () => {
-  let service: AppointmentService;
+  let appointmentService: AppointmentService;
   let patientService: PatientService;
 
   beforeEach(async () => {
@@ -13,12 +13,12 @@ describe('AppointmentService', () => {
       providers: [AppointmentService],
     }).compile();
 
-    service = module.get<AppointmentService>(AppointmentService);
+    appointmentService = module.get<AppointmentService>(AppointmentService);
     patientService = module.get(PatientService);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(appointmentService).toBeDefined();
   });
 
   // 1. An unconfirmed schedule should be created on success
@@ -31,7 +31,7 @@ describe('AppointmentService', () => {
     const startTime = new Date('2023-05-01T14:00:00Z');
     const endTime = new Date('2023-05-01T15:00:00Z');
 
-    const newAppointment = service.scheduleAppointment({
+    const newAppointment = appointmentService.scheduleAppointment({
       patientId: 1,
       startTime,
       endTime,
@@ -50,7 +50,7 @@ describe('AppointmentService', () => {
     const endTime = new Date('2023-04-15T08:00:00Z');
 
     expect(() =>
-      service.scheduleAppointment({
+      appointmentService.scheduleAppointment({
         patientId: 1,
         startTime,
         endTime,
@@ -63,7 +63,7 @@ describe('AppointmentService', () => {
     const endTime = startTime;
 
     expect(() =>
-      service.scheduleAppointment({
+      appointmentService.scheduleAppointment({
         patientId: 1,
         startTime,
         endTime,
@@ -76,7 +76,7 @@ describe('AppointmentService', () => {
     const endTime = new Date('2023-05-16T08:00:00Z');
 
     expect(() =>
-      service.scheduleAppointment({
+      appointmentService.scheduleAppointment({
         patientId: 1,
         startTime,
         endTime,
@@ -89,7 +89,7 @@ describe('AppointmentService', () => {
     const endTime = new Date('2023-05-01T14:00:00Z');
 
     expect(() =>
-      service.scheduleAppointment({
+      appointmentService.scheduleAppointment({
         patientId: 1,
         startTime,
         endTime,
@@ -104,7 +104,7 @@ describe('AppointmentService', () => {
     const endTime = new Date('2024-05-01T14:00:00Z');
 
     expect(() =>
-      service.scheduleAppointment({
+      appointmentService.scheduleAppointment({
         patientId: 1,
         startTime,
         endTime,
@@ -119,7 +119,7 @@ describe('AppointmentService', () => {
       const startTime = new Date('2023-05-01T14:00:00Z');
       const endTime = new Date('2023-05-01T15:00:00Z');
 
-      const newAppointment = service.scheduleAppointment({
+      const newAppointment = appointmentService.scheduleAppointment({
         patientId: 1,
         startTime,
         endTime,
