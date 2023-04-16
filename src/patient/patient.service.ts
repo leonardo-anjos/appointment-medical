@@ -10,4 +10,8 @@ export class PatientService {
       name: patientInput.name,
     };
   }
+
+  public async doesPatientExist(patientId: number): Promise<boolean> {
+    return false;
+  }
 }
