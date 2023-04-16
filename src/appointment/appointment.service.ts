@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { AppointmentInput } from './appointment.interface';
 
 @Injectable()
 export class AppointmentService {
-  public scheduleAppointment(appointmentData: Record<string, any>) {
+  public scheduleAppointment(appointmentData: AppointmentInput) {
     return {
       ...appointmentData,
       confirmed: false,
