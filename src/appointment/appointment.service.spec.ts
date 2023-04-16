@@ -78,4 +78,19 @@ describe('AppointmentService', () => {
       }),
     ).toThrowError(`appointment's endTime should be in the same day as start time's`);
   });
+
+  it('should throw an error when end time is in same day and hour of next month', () => {
+    const startTime = new Date('2023-04-01T14:00:00Z');
+    const endTime = new Date('2023-05-01T14:00:00Z');
+
+    expect(() =>
+      service.scheduleAppointment({
+        patientId: 1,
+        startTime,
+        endTime,
+      }),
+    ).toThrowError(
+      `appointment's endTime should be in the same day as start time's`,
+    );
+  });
 });
