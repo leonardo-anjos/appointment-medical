@@ -22,12 +22,21 @@ describe('PatientService', () => {
 
   describe('register', () => {
     it('should return a new patient with given name', async () => {
-      const newPatient = await service.register({ name: 'John Doe' });
+      const newPatient = await service.register({ name: 'Leonardo Anjos' });
 
       expect(newPatient).toEqual({
         id: expect.any(Number),
-        name: 'John Doe',
+        name: 'Leonardo Anjos',
       });
+    });
+  });
+
+  describe('does patient exist', () => {
+    it('should return false when no patient was registered', async () => {
+      const patientId = 1;
+      const patientExist = await service.doesPatientExist(patientId);
+
+      expect(patientExist).toBe(false);
     });
   });
 });
